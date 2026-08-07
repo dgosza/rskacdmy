@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("idle"); // idle | sending | error
@@ -12,9 +14,9 @@ export default function LoginPage() {
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) window.location.href = "/inicio";
+      if (user) router.replace("/inicio");
     });
-  }, []);
+  }, [router]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,7 +33,7 @@ export default function LoginPage() {
       setStatus("error");
       setErrorMsg(error.message);
     } else {
-      window.location.href = "/inicio";
+      router.replace("/inicio");
     }
   }
 

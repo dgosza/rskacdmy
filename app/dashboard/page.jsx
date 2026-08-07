@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import TopNav from "@/components/TopNav";
 import CertificateButton from "@/components/CertificateButton";
 import Badge from "@/components/Badge";
@@ -211,9 +212,9 @@ function DashboardContent({ user, profile }) {
                   ⚠ CREDENCIAL EXPIRADA em{" "}
                   {bestPassValidUntil.toLocaleDateString("pt-BR")} — a AI Risk
                   Academy exige recertificação anual. Refaça a avaliação no{" "}
-                  <a href="/trilha/10" className="underline">
+                  <Link href="/trilha/10" className="underline">
                     dossiê 10
-                  </a>
+                  </Link>
                   .
                 </>
               ) : (
