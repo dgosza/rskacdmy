@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: rgba(251, 191, 36, 0.25);
+  color: #fff;
+}
+
+/* ---- briefing content (module theory) ---- */
+
+.prose-academy h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  color: #f4f6f9;
+  letter-spacing: -0.01em;
+}
+
+.prose-academy h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  color: #f4f6f9;
+}
+
+.prose-academy h4 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: #fbbf24;
+}
+
+.prose-academy p {
+  margin-bottom: 0.95rem;
+  line-height: 1.75;
+  color: #b6bfcc;
+}
+
+.prose-academy strong {
+  color: #e6e9ef;
+}
+
+.prose-academy ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.prose-academy li {
+  position: relative;
+  padding-left: 1.15rem;
+  line-height: 1.65;
+  color: #b6bfcc;
+}
+
+.prose-academy li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #fbbf24;
+  font-size: 0.8em;
+}
+
+.prose-academy table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  font-size: 0.86rem;
+  border: 1px solid #1f2937;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.prose-academy th {
+  background-color: #131a24;
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid #1f2937;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: #fbbf24;
+}
+
+.prose-academy td {
+  padding: 0.75rem 0.85rem;
+  border-bottom: 1px solid #161d29;
+  vertical-align: top;
+  color: #b6bfcc;
+  background-color: #0d1117;
+}
+
+.prose-academy tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---- compact markdown for chat bubbles (assistente do dossiê) ---- */
+
+.prose-chat p {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.prose-chat p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-chat strong {
+  color: inherit;
+  font-weight: 700;
+}
+
+.prose-chat ul,
+.prose-chat ol {
+  margin: 0.4rem 0 0.6rem;
+  padding-left: 1.1rem;
+}
+
+.prose-chat ul {
+  list-style: disc;
+}
+
+.prose-chat ol {
+  list-style: decimal;
+}
+
+.prose-chat li {
+  margin-bottom: 0.2rem;
+  line-height: 1.5;
+}
+
+.prose-chat li:last-child {
+  margin-bottom: 0;
+}
+
+.prose-chat code {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.85em;
+}
+
+/* ---- toast + spinner ---- */
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.18s ease-out;
+}
+
+/* ---- sparkline (maturity index trend) ---- */
+
+.sparkline-fill {
+  transition: opacity 0.15s;
+}
