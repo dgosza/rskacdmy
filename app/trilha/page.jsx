@@ -210,7 +210,7 @@ function TrilhaContent({ user, profile }) {
                       </div>
                       {!isLocked && (
                         <span className="font-mono text-xs font-medium text-signal-400">
-                          {m.is_exam ? "INICIAR →" : isDone ? "REVISAR →" : "ABRIR →"}
+                          {isDone ? "REVISAR →" : m.is_exam ? "INICIAR →" : "ABRIR →"}
                         </span>
                       )}
                     </>

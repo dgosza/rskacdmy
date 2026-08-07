@@ -7,11 +7,12 @@ import CertificateButton from "./CertificateButton";
 import Badge from "./Badge";
 import Spinner from "./Spinner";
 
-export default function ExamForm({ userEmail, badge }) {
-  const [status, setStatus] = useState("idle"); // idle | loading | ready | submitting | done | error
+export default function ExamForm({ userEmail, badge, bestResult }) {
+  const alreadyPassed = Boolean(bestResult?.passed);
+  const [status, setStatus] = useState(alreadyPassed ? "done" : "idle"); // idle | loading | ready | submitting | done | error
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState(alreadyPassed ? bestResult : null);
   const [errorMsg, setErrorMsg] = useState("");
 
   async function startExam() {

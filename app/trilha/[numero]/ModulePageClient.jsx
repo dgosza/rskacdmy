@@ -17,7 +17,7 @@ import { getBadge } from "@/lib/badges";
 
 function ModuleContent({ numero, user, profile }) {
   const router = useRouter();
-  const [state, setState] = useState({ status: "loading", mod: null, progressRow: null });
+  const [state, setState] = useState({ status: "loading", mod: null, progressRow: null, bestCert: null });
 
   useEffect(() => {
     let active = true;
@@ -31,7 +31,7 @@ function ModuleContent({ numero, user, profile }) {
         .single();
 
       if (!mod) {
-        if (active) setState({ status: "not-found", mod: null, progressRow: null });
+        if (active) setState({ status: "not-found", mod: null, progressRow: null, bestCert: null });
         return;
       }
 
@@ -41,6 +41,8 @@ function ModuleContent({ numero, user, profile }) {
         .eq("user_id", user.id)
         .eq("module_number", numero)
         .maybeSingle();
+
+      let bestCert = null;
 
       if (mod.is_exam) {
         const { data: studyModules } = await supabase
@@ -57,9 +59,19 @@ function ModuleContent({ numero, user, profile }) {
           router.replace("/trilha?locked=exam");
           return;
         }
+
+        const { data: cert } = await supabase
+          .from("certifications")
+          .select("score, total, passed")
+          .eq("user_id", user.id)
+          .eq("passed", true)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
+        bestCert = cert ?? null;
       }
 
-      if (active) setState({ status: "ready", mod, progressRow });
+      if (active) setState({ status: "ready", mod, progressRow, bestCert });
     }
 
     load();
@@ -93,7 +105,7 @@ function ModuleContent({ numero, user, profile }) {
     );
   }
 
-  const { mod, progressRow } = state;
+  const { mod, progressRow, bestCert } = state;
   const nextHref = numero < 10 ? `/trilha/${numero + 1}` : null;
   const badge = getBadge(numero);
 
@@ -160,7 +172,7 @@ function ModuleContent({ numero, user, profile }) {
 
         <div className="mt-6">
           {mod.is_exam ? (
-            <ExamForm userEmail={user.email} badge={badge} />
+            <ExamForm userEmail={user.email} badge={badge} bestResult={bestCert} />
           ) : (
             <ModuleQuiz
               moduleNumber={numero}
